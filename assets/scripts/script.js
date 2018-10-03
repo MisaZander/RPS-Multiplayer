@@ -27,14 +27,40 @@ var config = {
   //enqueue
   $("#enqueue").on("click", function(event) {
     event.preventDefault();  
-    let userName = $("#userName").val();
-    //userName = "Cockus Blackamus";
-    player.userName = userName;
-    db.ref().push(player);
+    var userName = $("#userName").val();
+
+    //Get latest id
+    /*db.ref().orderByChild("playerID").limitToLast(1).on("child_added", function(snapshot) {
+        var playerID = 0;
+        if(snapshot == null) {
+            playerID = 1;
+        } else {
+            playerID = snapshot.playerID;
+        }
+
+        player.playerID = playerID;
+        player.userName = userName;
+        db.ref().push(player);
+    });
+
+    //db.ref().off("child_added"); */
+    $("#enqueue").val("");    
   });
 
   db.ref().on("value", function(snapshot) {
     ref = snapshot.val();
     console.log(ref);
+    console.log(ref.users[0].playerID);
   }); //db ref on
 
+
+  //var users = db.ref("users");
+  /*for(let i=0; i<5; i++) {
+    let userRef = db.ref("users/" + i);
+    let user ={
+        playerID: i
+    };
+    userRef.set(user);
+  }*/
+
+  //console.log(ref.users[0].playerID);
