@@ -47,10 +47,11 @@ var config = {
 
   db.ref().on("value", function(snapshot) {
     ref = snapshot.val();
+    console.log(player);
     console.log(ref);
     
     //Attempt to find an opponent
-    if(player.opponentID === 0 && ref != null) {
+    if(player.opponentID === 0 && ref != null && player.playerID !== 0) {
         for(let i = 0; i < ref.users.length; i++) {
             //Only match with selected opponent if it isn't you and the opponent is unassigned
             if(ref.users[i].playerID !== player.playerID && ref.users[i].opponentID === 0) {
