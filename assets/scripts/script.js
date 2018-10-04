@@ -28,29 +28,27 @@ var config = {
   $("#enqueue").on("click", function(event) {
     event.preventDefault();  
     var userName = $("#userName").val();
+    player.userName = userName;
 
     //Get latest id
-    /*db.ref().orderByChild("playerID").limitToLast(1).on("child_added", function(snapshot) {
-        var playerID = 0;
-        if(snapshot == null) {
-            playerID = 1;
-        } else {
-            playerID = snapshot.playerID;
-        }
+    if(ref == null){
+        player.playerID = 1;
+        db.ref("users/0").set(player);
+    } else {
+        player.playerID = ref.users[ref.users.length - 1].playerID + 1;
+        db.ref("users/" + ref.users.length).set(player);
+    }
 
-        player.playerID = playerID;
-        player.userName = userName;
-        db.ref().push(player);
-    });
+    //db.ref("users/" + (ref.users.length - 1)).set(player);
 
     //db.ref().off("child_added"); */
-    $("#enqueue").val("");    
+    $("#userName").val("");    
   });
 
   db.ref().on("value", function(snapshot) {
     ref = snapshot.val();
     console.log(ref);
-    console.log(ref.users[0].playerID);
+    //console.log(ref.users[0].playerID);
   }); //db ref on
 
 
