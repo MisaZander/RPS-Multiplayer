@@ -48,7 +48,29 @@ var config = {
   db.ref().on("value", function(snapshot) {
     ref = snapshot.val();
     console.log(ref);
-    //console.log(ref.users[0].playerID);
+    
+    //Attempt to find an opponent
+    if(player.opponentID === 0 && ref != null) {
+        for(let i = 0; i < ref.users.length; i++) {
+            //Only match with selected opponent if it isn't you and the opponent is unassigned
+            if(ref.users[i].playerID !== player.playerID && ref.users[i].opponentID === 0) {
+                //Set your opponent ID equal to that of the selected opponent
+                player.opponentID = ref.users[i].playerID;
+
+                //Set the opponent's opponentID equal to your player ID
+                db.ref("users/" + i).child("opponentID").set(player.playerID);
+
+                //Find yourself in the database and update your opponent ID
+                for(let j = 0; j < ref.users.length; j++){
+                    if(ref.users[j].playerID === player.playerID) {
+                        db.ref("users/" + j).child("opponentID").set(ref.users[i].playerID);
+                        break;
+                    }
+                }
+                break;
+            }
+        }
+    }
   }); //db ref on
 
 
