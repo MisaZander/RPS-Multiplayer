@@ -5,19 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
     <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase.js"></script>
     <script src="assets/scripts/jquery.min.js"></script>
     <script src="assets/scripts/script.js" defer></script>
     <title>RPSMMORPG</title>
 </head>
 <body>
-    <h1>Open the console to see the magic!</h1>
-    <form>
-        <div class="form-group">
-            <label for="userName">Enter a username</label>
-            <input type="text" class="form-control" id="userName">
+    <div class="container">
+        <div class="jumbotron">
+            <h1 class="display-4 text-center">RPSMMORPG</h1>
+            <p class="lead text-center">Settle the score with someone you don't know!</p>
         </div>
-        <button type="submit" class="btn btn-success" id="enqueue">Queue Up!</button>
-    </form>
+        <div id="queueUp">
+            <form>
+                <div class="form-group">
+                    <label for="userName">Enter a username</label>
+                    <input type="text" class="form-control" id="userName">
+                </div>
+                <button type="submit" class="btn btn-success" id="enqueue">Queue Up!</button>
+            </form>
+        </div>
+        <div id="playground">
+            <h1>You: <span id="playerName">Undecided</span></h1>
+            <h1>Opponent: <span id="opponentName">Finding a worthy opponent...</span></h1>
+        </div>
+        <div id="results">
+
+        </div>
+    </div>
+    
 </body>
 </html>

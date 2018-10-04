@@ -39,10 +39,10 @@ var config = {
         db.ref("users/" + ref.users.length).set(player);
     }
 
-    //db.ref("users/" + (ref.users.length - 1)).set(player);
-
-    //db.ref().off("child_added"); */
-    $("#userName").val("");    
+    $("#userName").val(""); 
+    $("#queueUp").css("display", "none");
+    $("#playground").css("display", "block");
+    $("#playerName").text(player.userName);
   });
 
   db.ref().on("value", function(snapshot) {
@@ -65,6 +65,7 @@ var config = {
                 for(let j = 0; j < ref.users.length; j++){
                     if(ref.users[j].playerID === player.playerID) {
                         db.ref("users/" + j).child("opponentID").set(ref.users[i].playerID);
+                        $("#opponentName").text(ref.users[i].userName);
                         break;
                     }
                 }
@@ -73,15 +74,3 @@ var config = {
         }
     }
   }); //db ref on
-
-
-  //var users = db.ref("users");
-  /*for(let i=0; i<5; i++) {
-    let userRef = db.ref("users/" + i);
-    let user ={
-        playerID: i
-    };
-    userRef.set(user);
-  }*/
-
-  //console.log(ref.users[0].playerID);
