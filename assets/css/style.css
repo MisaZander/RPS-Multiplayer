@@ -5,6 +5,7 @@ body, html {
 
 #playground, #results {
     display: none; /* Hide these at first */
+    width: 100%;
 }
 
 h2 {

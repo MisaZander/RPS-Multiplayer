@@ -13,46 +13,52 @@
 </head>
 <body>
     <div class="container">
-        <div class="jumbotron">
-            <h1 class="display-4 text-center">RPSMMORPG</h1>
-            <p class="lead text-center">Settle the score with someone you don't know!</p>
-        </div>
-        <div id="queueUp">
-            <form>
-                <div class="form-group">
-                    <label for="userName">Enter a username</label>
-                    <input type="text" class="form-control" id="userName">
+        <div class="row">
+            <div class="col-12">
+                <div class="jumbotron">
+                    <h1 class="display-4 text-center">RPSMMORPG</h1>
+                    <p class="lead text-center">Settle the score with someone you don't know!</p>
                 </div>
-                <button type="submit" class="btn btn-success" id="enqueue">Queue Up!</button>
-            </form>
-        </div>
-        <div id="playground">
-            <!-- <h1>You: <span id="playerName">Undecided</span></h1>
-            <h1>Opponent: <span id="opponentName">Finding a worthy opponent...</span></h1> -->
-            <!-- <div class="row"> -->
-                <div class="col-12">
-                    <div class="row">
-                        <div class="alert alert-primary col-12" role="alert" id="message">
-                            Welcome, please wait while we find an opponent...
-                        </div>
-                        <div class="col-6">
-                            <h2 class="text-center" id="playerName">You</h2>
-                            <img src="assets/images/clock.jpg" id="playerChoice" alt="clock">
-                            <h2 class="text-center" id="playerStatus">Placeholder</h2>
-                        </div>
-                        <div class="col-6">
-                            <h2 class="text-center" id="opponentName">Finding...</h2>
-                            <img src="assets/images/clock.jpg" id="opponentChoice" alt="clock">
-                            <h2 class="text-center" id="opponentStatus">Placeholder</h2>
-                        </div>
-                    </div>
-                    
-                <!-- </div> -->
             </div>
         </div>
-        <div id="results">
-
+        <div class="row">
+            <div id="queueUp" class="col-12">
+                <form>
+                    <div class="form-group">
+                        <label for="userName">Enter a username</label>
+                        <input type="text" class="form-control" id="userName">
+                    </div>
+                    <button type="submit" class="btn btn-success" id="enqueue">Queue Up!</button>
+                </form>
+            </div>
         </div>
+        <div class="row">
+            <div id="playground" class="col-12">
+                <!-- <div class="alert alert-primary" role="alert" id="message">
+                    Welcome, please wait while we find an opponent...
+                </div> -->
+                <div class="row">
+                    <div class="col-6">
+                        <h2 class="text-center" id="playerName">You</h2>
+                        <img src="assets/images/clock.jpg" id="playerChoice" alt="clock">
+                        <h2 class="text-center" id="playerStatus">Placeholder</h2>
+                    </div>
+                    <div class="col-6">
+                        <h2 class="text-center" id="opponentName">Finding...</h2>
+                        <img src="assets/images/clock.jpg" id="opponentChoice" alt="clock">
+                        <h2 class="text-center" id="opponentStatus">Placeholder</h2>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        <div class="row">
+            <div id="results" class="col-12">
+
+            </div>
+        </div>
+            
+            
     </div>
     
 </body>
