@@ -107,3 +107,13 @@ var config = {
     $("#scissors").on("click", function() {
         queueChoice("scissors");
     });
+
+    //Destroy identity before leaving
+    window.onbeforeunload = function(event) {
+        for(let i = 0; i < ref.users.length; i++){
+            if(ref.users[i].playerID === player.playerID){
+                db.ref("users").child(i).remove();
+                break;
+            }
+        }
+    }
