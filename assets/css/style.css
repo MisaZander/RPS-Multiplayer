@@ -6,3 +6,8 @@ body, html {
 #playground, #results {
     display: none; /* Hide these at first */
 }
+
+h2 {
+    max-width: 420px;
+    margin: 0;
+}
