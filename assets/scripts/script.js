@@ -73,4 +73,37 @@ var config = {
             }
         }
     }
+
+
   }); //db ref on
+
+
+  function queueChoice(choice) {
+      if(player.queue.choice === "" && player.opponentID !== 0){
+          player.queue.choice = choice;
+          
+          //change the image
+          $("#playerChoice").attr("src", "./assets/images/" + choice + "420.jpg");
+          player.queue.choice = ""; //DELETE THIS
+
+          //push to the DB
+          for(let i = 0; i < ref.users.length; i++) {
+              if(ref.users[i].playerID === player.playerID) {
+                  db.ref("users/" + i + "/queue").child("choice").set(choice);
+                  break;
+              }
+          }
+      }
+  }
+
+    $("#rock").on("click", function() {
+        queueChoice("rock");
+    });
+
+    $("#paper").on("click", function() {
+        queueChoice("paper");
+    });
+
+    $("#scissors").on("click", function() {
+        queueChoice("scissors");
+    });
