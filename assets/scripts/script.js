@@ -11,6 +11,7 @@ var config = {
   var ref;
 
   var player = {
+      lock: false,
       playerID: 0,
       opponentID: 0,
       totalWins: 0,
@@ -35,8 +36,18 @@ var config = {
         player.playerID = 1;
         db.ref("users/0").set(player);
     } else {
-        player.playerID = ref.users[ref.users.length - 1].playerID + 1;
-        db.ref("users/" + ref.users.length).set(player);
+        // player.playerID = ref.users[ref.users.length - 1].playerID + 1;
+        // db.ref("users/" + ref.users.length).set(player);
+        for(let i = 0; i < ref.users.length; i++) {
+            if(ref.users[i].playerID === 0) {
+                player.playerID = i + 1;
+                db.ref("users/" + i).set(player);
+                break;
+            } else if(i === ref.users.length - 1){
+                player.playerID = i + 2;
+                db.ref("users/" + (i + 1)).set(player);
+            }
+        }
     }
 
     $("#userName").val(""); 
@@ -45,16 +56,18 @@ var config = {
     $("#playerName").text(player.userName);
   });
 
-  db.ref().on("value", function(snapshot) {
+  db.ref().on("value", async function(snapshot) {
     ref = snapshot.val();
     console.log(player);
-    console.log(ref);
+    console.log(ref);   
+    
+    if(player.opponentID !== 0) return;
     
     //Attempt to find an opponent
     if(player.opponentID === 0 && ref != null && player.playerID !== 0) {
         for(let i = 0; i < ref.users.length; i++) {
             //Only match with selected opponent if it isn't you and the opponent is unassigned
-            if(ref.users[i].playerID !== player.playerID && ref.users[i].opponentID === 0) {
+            if(ref.users[i].playerID !== player.playerID && ref.users[i].opponentID === 0) { //Chrome says false, firefox says true
                 //Set your opponent ID equal to that of the selected opponent
                 player.opponentID = ref.users[i].playerID;
 
@@ -68,9 +81,11 @@ var config = {
                         $("#opponentName").text(ref.users[i].userName);
                         break;
                     }
-                }
-                break;
-            }
+                } 
+                break;               
+            } else {
+                sleep(500);
+            }       
         }
     }
 
@@ -109,11 +124,19 @@ var config = {
     });
 
     //Destroy identity before leaving
-    window.onbeforeunload = function(event) {
-        for(let i = 0; i < ref.users.length; i++){
-            if(ref.users[i].playerID === player.playerID){
-                db.ref("users").child(i).remove();
-                break;
-            }
-        }
+    // window.onbeforeunload = function(event) {
+    //     if(ref == null) return;
+    //     for(let i = 0; i < ref.users.length; i++){
+    //         if(ref.users[i].playerID === player.playerID){
+    //             //db.ref("users").child(i).remove();
+    //             player.playerID = 0;
+    //             player.userName = "";
+    //             db.ref("users/" + i).set(player);
+    //             break;
+    //         }
+    //     }
+    // }
+
+    function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
     }
